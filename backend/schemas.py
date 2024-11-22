@@ -21,3 +21,11 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+class UserAuth(BaseModel):
+    username: str
+    password: str
+
+
+class ResponseDto(BaseModel):
+    message: str
+    data: dict | list | None = None

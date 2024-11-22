@@ -3,8 +3,8 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine
 from models import Base, User
-from schemas import User, UserCreate, UserUpdate
-from user_bl import create_user
+from schemas import User, UserAuth, UserCreate, UserUpdate
+from user_bl import create_user, auth
 
 # Initialize database
 Base.metadata.create_all(bind=engine)
@@ -23,3 +23,6 @@ def get_db():
 def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
     return create_user(db, user)
 
+@app.post("/users/auth", response_model=User)
+def authenticate_user(user: UserAuth, db: Session = Depends(get_db)):
+    return auth(db, user)
