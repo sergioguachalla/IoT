@@ -10,3 +10,4 @@ class User(Base):
    lastname = Column(String)
    email = Column(String)
    password = Column(String)
+   group = Column(String)

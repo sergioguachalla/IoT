@@ -21,11 +21,13 @@ def create_user(db: Session, user: UserCreate):
         lastname=user.lastname,
         email=user.email,
         password=hashed_password,  
+        group = "users"
     )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
+
 
 def update_user(db: Session, user_id: int, user_update: UserUpdate):
     db_user = db.query(User).filter(User.id == user_id).first()
