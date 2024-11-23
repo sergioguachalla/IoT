@@ -1,3 +1,4 @@
+import datetime
 from pydantic import BaseModel, EmailStr
 
 class UserBase(BaseModel):
@@ -25,7 +26,22 @@ class UserAuth(BaseModel):
     username: str
     password: str
 
+class RecordBase(BaseModel):
+    user_id: int
+    location: str
+    
+class RecordCreate(RecordBase):
+    video_url: str
 
-class ResponseDto(BaseModel):
-    message: str
-    data: dict | list | None = None
+
+class RecordDb(RecordBase):
+    video_url: str
+    created_at: datetime.datetime
+    
+class Record(RecordBase):
+    id: int
+    video_url: str
+    created_at: datetime.datetime
+
+    class Config:
+        orm_mode = True

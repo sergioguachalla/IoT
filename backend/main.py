@@ -1,10 +1,11 @@
 
 import os
-from fastapi import FastAPI, Depends, File, HTTPException, UploadFile
+from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, Query
 from sqlalchemy.orm import Session
+from records_bl import save_record
 from database import SessionLocal, engine
 from models import Base, User
-from schemas import User, UserAuth, UserCreate, UserUpdate
+from schemas import User, UserAuth, UserCreate, UserUpdate, RecordBase, RecordCreate
 from user_bl import create_user, auth
 
 from google_bl import upload_video_to_drive
@@ -33,7 +34,10 @@ def authenticate_user(user: UserAuth, db: Session = Depends(get_db)):
 
 ##Google Drive API Test
 @app.post("/upload/")
-async def upload_video(file: UploadFile = File(...)):
+async def upload_video(user_id: int, 
+                       location: str,
+                       file: UploadFile = File(...),
+                         db: Session = Depends(get_db)):
     try:
         # Guardar temporalmente el archivo en el servidor
         temp_file_path = f"temp_{file.filename}"
@@ -46,7 +50,15 @@ async def upload_video(file: UploadFile = File(...)):
         # Eliminar el archivo temporal
         os.remove(temp_file_path)
 
-        return {"file_url": file_url}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+
+    
+
+    record_db = RecordCreate(user_id=user_id, location=location, video_url=file_url)
+    return save_record(db, record_db)
+
+    
+    
+

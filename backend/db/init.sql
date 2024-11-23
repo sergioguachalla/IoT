@@ -27,4 +27,4 @@ CREATE TABLE records (
 -- Admin
 -- Insertar el usuario "admin" con la contraseña hasheada en la tabla `users`
 INSERT INTO users (username, name, lastname, email, password, "group")
-VALUES ('admin', 'Sergio', 'Guachalla', 'sergioguachalla@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', "admin");
+VALUES ('admin', 'Sergio', 'Guachalla', 'sergioguachalla@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'admin');
