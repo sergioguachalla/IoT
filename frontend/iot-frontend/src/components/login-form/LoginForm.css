@@ -21,3 +21,13 @@
 .w-full {
     width: 100%;
 }
+
+.signup-link {
+    color: #007ad9;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}

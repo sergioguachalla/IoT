@@ -11,7 +11,7 @@ const Navbar = () => {
             ]
         },
         { label: 'Registrarse', icon: 'pi pi-info', command: () => window.location.href = "/login-form" },
-        { label: 'Iniciar Sesión', icon: 'pi pi-envelope', command: () => window.location.href = "/contact" }
+        { label: 'Iniciar Sesión', icon: 'pi pi-envelope', command: () => window.location.href = "/login" }
     ];
 
     const end = <button className="p-button p-component p-button-rounded p-button-secondary">
