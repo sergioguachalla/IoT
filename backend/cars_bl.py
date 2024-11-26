@@ -19,3 +19,6 @@ def save_car(car: CarBase, db: Session):
       db.commit()
       db.refresh(db_car)
       return db_car
+
+def get_cars(user_id: int, db: Session):
+    return db.query(CarDb).filter(CarDb.user_id == user_id).all()

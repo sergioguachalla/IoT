@@ -2,10 +2,11 @@
 import os
 from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, Query
 from sqlalchemy.orm import Session
+from cars_bl import save_car
 from records_bl import save_record
 from database import SessionLocal, engine
 from models import Base, User
-from schemas import User, UserAuth, UserCreate, UserUpdate, RecordBase, RecordCreate
+from schemas import CarBase, User, UserAuth, UserCreate, UserUpdate, RecordBase, RecordCreate
 from user_bl import create_user, auth
 
 from google_bl import upload_video_to_drive
@@ -31,6 +32,19 @@ def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
 def authenticate_user(user: UserAuth, db: Session = Depends(get_db)):
     return auth(db, user)
 
+# TODO: Test
+@app.get("/users/all")
+def get_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    return get_users(db, skip, limit)
+
+# TODO: Test
+@app.post("/users/car", response_model=CarBase) 
+def create_car( car: CarBase, db: Session = Depends(get_db)):
+    return save_car(db, car)
+
+@app.get("/users/{user_id}/cars")
+def get_cars(user_id: int, db: Session = Depends(get_db)):
+    return get_cars(user_id, db)
 
 ##Google Drive API Test
 @app.post("/upload/")
