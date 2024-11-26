@@ -10,7 +10,7 @@ const Navbar = () => {
                 { label: 'Parqueo', icon: 'pi pi-info-circle', command: () => window.location.href = "/feature2" }
             ]
         },
-        { label: 'Registrarse', icon: 'pi pi-info', command: () => window.location.href = "/signup" },
+        { label: 'Registrarse', icon: 'pi pi-info', command: () => window.location.href = "/login-form" },
         { label: 'Iniciar Sesión', icon: 'pi pi-envelope', command: () => window.location.href = "/contact" }
     ];
 

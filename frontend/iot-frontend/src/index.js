@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PrimeReactProvider } from 'primereact/api';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from "./components/login/Login";
+import LoginForm from "./components/login-form/LoginForm";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +13,7 @@ root.render(
         <Router>
             <Routes>
                 <Route path="/" element={<App />} />
-                <Route path="/signup" element={<Login />} />
+                <Route path="/login" element={<LoginForm />} />
             </Routes>
         </Router>
     </PrimeReactProvider>
