@@ -26,6 +26,7 @@ class UserAuth(BaseModel):
     username: str
     password: str
 
+
 class RecordBase(BaseModel):
     user_id: int
     location: str
@@ -45,3 +46,16 @@ class Record(RecordBase):
 
     class Config:
         orm_mode = True
+
+
+class CarBase(BaseModel):
+    user_id: int
+    brand: str
+    plate: str
+    color: str
+    model: str
+    year: int
+
+class CarDb(CarBase):
+    created_at: datetime.datetime
+
