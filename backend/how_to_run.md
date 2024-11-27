@@ -8,9 +8,9 @@
 ## Credenciales
 - Para el tema de las credenciales de Google Cloud crear un directorio "credentials" y pegar adentro del mismo el archivo "credentials.json"
 - La estructura debe ser la siguiente: <br> 
-  * backend
-    * credentials
-      * credentials.json
+  * 💾backend
+    * 💾credentials
+      * 📄credentials.json
 
 ## Correr el servidor
 - Correr el comando `uvicorn main:app --host 0.0.0.0 --port 8000`

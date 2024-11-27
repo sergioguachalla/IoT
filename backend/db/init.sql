@@ -10,18 +10,6 @@ CREATE TABLE users (
 );
 
 
--- Create the `records` table
-CREATE TABLE records (
-    id SERIAL PRIMARY KEY,             -- Auto-incrementing unique identifier for each record
-    user_id INTEGER NOT NULL,          -- Foreign key to associate the record with a user
-    video_url VARCHAR(255) NOT NULL,   -- URL of the recorded video
-    location VARCHAR(255) NOT NULL,    -- Location where the video was recorded
-    created_at TIMESTAMP DEFAULT NOW(),-- Timestamp for when the record was created
-    place VARCHAR(255),                -- Place where the video was recorded
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- Foreign key constraint
-
-);
-
 -- Create the cars table 
 CREATE TABLE cars (
     id SERIAL PRIMARY KEY,             -- Auto-incrementing unique identifier for each record
@@ -35,6 +23,39 @@ CREATE TABLE cars (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- Foreign key constraint
 
 );
+
+-- Create the parking records table
+CREATE TABLE parking_records (
+    id SERIAL PRIMARY KEY,             -- Auto-incrementing unique identifier for each record
+    user_id INTEGER NOT NULL,          -- Foreign key to associate the record with a user
+    car_id INTEGER NOT NULL,           -- Foreign key to associate the record with a car
+    latitude VARCHAR(255) NOT NULL,    -- Latitude of the parking location
+    longitude VARCHAR(255) NOT NULL,   -- Longitude of the parking location
+    location VARCHAR(255) NOT NULL,    -- Location where the car was parked
+    parking_date TIMESTAMP DEFAULT NOW(),-- Timestamp for when the record was created
+    start_time TIMESTAMP DEFAULT NOW(),              -- Start time of the parking
+    end_time TIMESTAMP NULL,                 -- End time of the parking
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,  -- Foreign key constraint
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE     -- Foreign key constraint
+);
+
+-- Create the `records` table
+CREATE TABLE records (
+    id SERIAL PRIMARY KEY,             -- Auto-incrementing unique identifier for each record
+    user_id INTEGER NOT NULL,
+    parking_record_id INTEGER NOT NULL,          -- Foreign key to associate the record with a user
+    video_url VARCHAR(255) NOT NULL,   -- URL of the recorded video
+    location VARCHAR(255) NOT NULL,    -- Location where the video was recorded
+    created_at TIMESTAMP DEFAULT NOW(),-- Timestamp for when the record was created
+    place VARCHAR(255),                -- Place where the video was recorded
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,  -- Foreign key constraint
+    FOREIGN KEY (parking_record_id) REFERENCES parking_records(id) ON DELETE CASCADE  -- Foreign key constraint
+
+);
+
+
+
+
 
 
 

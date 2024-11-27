@@ -63,3 +63,17 @@ class ResponseDto(BaseModel):
     message: str | None
     data: dict | list | None
     success: bool
+
+
+class ParkingRecordBase(BaseModel):
+    user_id: int
+    car_id: int
+    longitude: str
+    latitude: str
+    location: str
+    end_time: datetime.datetime | None
+
+class ParkingRecordDb(ParkingRecordBase):
+    id: int
+    parking_date: datetime.datetime
+    start_time: datetime.datetime

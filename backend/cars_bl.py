@@ -14,6 +14,7 @@ def save_car(car: CarBase, db: Session):
          car_model=car.model,
          car_year=car.year,
          created_at= datetime.datetime.now()
+         
       )
       db.add(db_car)
       db.commit()

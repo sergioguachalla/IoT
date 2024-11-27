@@ -3,10 +3,10 @@ import os
 from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, Query
 from sqlalchemy.orm import Session
 from cars_bl import get_cars_by_user_id, save_car
-from records_bl import get_record_by_user_id, save_record
+from records_bl import get_record_by_user_id, save_parking_record, save_record, update_parking_record
 from database import SessionLocal, engine
 from models import Base, Car, User
-from schemas import CarBase, ResponseDto, User, UserAuth, UserCreate, UserUpdate, RecordBase, RecordCreate
+from schemas import CarBase, ParkingRecordBase, ResponseDto, User, UserAuth, UserCreate, UserUpdate, RecordBase, RecordCreate
 from user_bl import create_user, auth, get_all_users
 from google_bl import upload_video_to_drive
 from fastapi.middleware.cors import CORSMiddleware
@@ -104,5 +104,20 @@ async def upload_video(user_id: int,
     return save_record(db, record_db)
 
     
-    
+@app.post("/users/parking_record", response_model=ResponseDto)
+def create_parking_record(record: ParkingRecordBase, db: Session = Depends(get_db)):
+    if save_parking_record(db, record):
 
+        response = ResponseDto(message="Registro de parqueo creado exitosamente", data=None, success=True)
+    else:
+        response = ResponseDto(message="Error al crear el registro de parqueo", data=None, success=False)
+    return response
+
+
+@app.put("/users/parking_record/{record_id}", response_model=ResponseDto)
+def update_parking_record_time(record_id: int, db: Session = Depends(get_db)):
+    if update_parking_record(db, record_id):
+        response = ResponseDto(message="Registro de parqueo actualizado exitosamente", data=None, success=True)
+    else:
+        response = ResponseDto(message="Error al actualizar el registro de parqueo", data=None, success=False)
+    return response
