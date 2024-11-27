@@ -3,7 +3,7 @@ from models import User
 from schemas import UserCreate, UserUpdate, UserAuth
 from auth_util import hash_password, verify_password
 
-def get_users(db: Session, skip: int = 0, limit: int = 10):
+def get_all_users(db: Session, skip: int = 0, limit: int = 10):
     return db.query(User).offset(skip).limit(limit).all()
 
 def get_user_by_id(db: Session, user_id: int):
@@ -50,7 +50,15 @@ def delete_user(db: Session, user_id: int):
 def auth(db: Session, user_auth: UserAuth):
     user = get_user_by_username(db, user_auth.username)
     if not user:
-        return None
+        return False
     if not verify_password(user.password, user_auth.password):
-        return None
-    return user
+        return False
+    user_dict = {
+        "id": user.id,
+        "username": user.username,
+        "name": user.name,
+        "lastname": user.lastname,
+        "email": user.email,
+        "group": user.group
+    }
+    return user_dict

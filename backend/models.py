@@ -16,6 +16,7 @@ class User(Base):
    group = Column(String)
 
    records = relationship('Record', back_populates='user')
+   cars = relationship('Car', back_populates='user')
 
 class Record(Base):
     __tablename__ = 'records'
@@ -33,11 +34,11 @@ class Car(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    brand = Column(String(255), nullable=False)
-    plate = Column(String(255), nullable=False)
-    color = Column(String(255), nullable=False)
-    model = Column(String(255), nullable=False)
-    year = Column(Integer, nullable=False)
+    car_brand = Column(String(255), nullable=False)
+    car_plate = Column(String(255), nullable=False)
+    car_color = Column(String(255), nullable=False)
+    car_model = Column(String(255), nullable=False)
+    car_year = Column(Integer, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.now)
     
     user = relationship('User', back_populates='cars')

@@ -59,3 +59,7 @@ class CarBase(BaseModel):
 class CarDb(CarBase):
     created_at: datetime.datetime
 
+class ResponseDto(BaseModel):
+    message: str | None
+    data: dict | list | None
+    success: bool

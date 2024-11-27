@@ -22,3 +22,7 @@ def save_record(db: Session, record: RecordCreate):
     db.commit()
     db.refresh(db_record)
     return db_record
+
+
+def get_record_by_user_id(db: Session, user_id: int):
+    return db.query(Record).filter(Record.user_id == user_id).all()
