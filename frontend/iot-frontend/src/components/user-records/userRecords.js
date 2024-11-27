@@ -13,17 +13,14 @@ const UserRecords = () => {
    useEffect(() => {
       const infoObject = JSON.parse(localStorage.getItem('info'));
       if (infoObject) {
-          setInfo(infoObject);
+         setInfo(infoObject);
          setTimeout(() => {
-            axios.get(`http://localhost:8000/users/${infoObject.id}/records`)
+            axios.get(`http://192.168.1.202:8000/users/${infoObject.id}/records`)
                .then(response => {
                   setRecords(response.data);
                   setLoading(false);
                })
-               .catch(error => {
-                  console.error("There was an error fetching the records!", error);
-                  setLoading(false);
-               });
+               
          }, 300);
       } else {
           console.warn("No info found in localStorage.");
@@ -33,7 +30,7 @@ const UserRecords = () => {
    
    const itemTemplate = (record) => {
       return (
-          <div className="p-card p-shadow-2 p-mb-3" style={{ padding: '2rem' }}>
+          <div className="p-card p-shadow-2 p-mb-3" style={{ padding: '16px', borderRadius: '10px', margin: '24px', width: '50%' }}>
               <h3>{`Location: ${record.location}`}</h3>
               <p><b>User ID:</b> {record.user_id}</p>
               <p><b>Created At:</b> {new Date(record.created_at).toLocaleString()}</p>
@@ -77,6 +74,8 @@ const UserRecords = () => {
 
             <div className="dataview-demo" style={{ padding: '2rem' }}>
             <h2>Mis registros</h2>
+            <p>En esta página podrás ver tus registros.</p>
+
             <DataView
                 value={records}
                 layout="list" 
