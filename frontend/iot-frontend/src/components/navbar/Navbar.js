@@ -9,7 +9,7 @@ const Navbar = () => {
         const info = localStorage.getItem('info');
         setInfo(info ? JSON.parse(info) : null);
     }, []);
-    const item = info ? {label: info.username, action: () => window.location.href = "/profile"} : {label: 'Iniciar Sesión', command: () => window.location.href = "/login-form"};
+    const item = info ? {label: info.username, action: () => window.location.href = "/profile"} : {label: 'Iniciar Sesión', command: () => window.location.href = "/login"};
     const items = [
         { label: 'Inicio', icon: 'pi pi-home', command: () => window.location.href = "/" },
         { label: 'Registrar', icon: 'pi pi-star',
@@ -18,13 +18,13 @@ const Navbar = () => {
                 { label: 'Parqueo', icon: 'pi pi-info-circle', command: () => window.location.href = "/feature2" }
             ]
         },
-        { label: 'Registrarse', icon: 'pi pi-info', command: () => window.location.href = "/login-form" },
+        { label: 'Registrarse', icon: 'pi pi-info', command: () => window.location.href = "/signup" },
         {label: item.label, icon: 'pi pi-user', command: () => 
             {
                 if (info) {
                     window.location.href = "/profile";
                 } else {
-                    window.location.href = "/login-form";
+                    window.location.href = "/login";
                 }
             }   
         }

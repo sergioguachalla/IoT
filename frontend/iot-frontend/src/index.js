@@ -7,6 +7,7 @@ import { PrimeReactProvider } from 'primereact/api';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from "./components/login-form/LoginForm";
 import Home from './components/home/Home';
+import Signup from './components/signup/Signup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,7 @@ root.render(
                 <Route path="/" element={<App />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="signup" element={<SignUp />} />
+                <Route path="/signup" element={<Signup />} />
             </Routes>
         </Router>
     </PrimeReactProvider>
