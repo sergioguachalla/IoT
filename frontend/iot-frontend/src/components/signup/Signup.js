@@ -6,19 +6,20 @@ import Navbar from '../navbar/Navbar';
 import axios from 'axios';
 import { Message } from 'primereact/message';
 import { useNavigate } from 'react-router-dom';
-const Signup = () => {
-   const navigate = useNavigate();
-   const [response, setResponse] = useState(null);
-   useEffect(() => {
-      if (response && response.success) {
-         setTimeout(() => {
-            navigate('/login');
-        }, 500);
-      }
-   }, [response]);
 
-   
-   const [formData, setFormData] = useState({
+const Signup = () => {
+    const navigate = useNavigate();
+    const [response, setResponse] = useState(null);
+
+    useEffect(() => {
+        if (response && response.success) {
+            setTimeout(() => {
+                navigate('/login');
+            }, 500);
+        }
+    }, [response]);
+
+    const [formData, setFormData] = useState({
         username: '',
         name: '',
         lastname: '',
@@ -33,14 +34,10 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-         axios.post('http://localhost:8000/users/', formData).then((response) => {
-            console.log(response.data);
+        axios.post(`${process.env.REACT_APP_API_URL}/users/`, formData).then((response) => {
             setResponse(response.data);
-         });
-        console.log('Form Data Submitted:', formData);
+        });
     };
-    
-         
 
     return (
         <>
@@ -50,61 +47,89 @@ const Signup = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: 'calc(100vh - 60px)', // Resta la altura de la barra de navegación
-                    background: '#f5f5f5',
-                    margin: 0,
+                    height: 'calc(100vh - 60px)',
+                    background: '#f9f9f9',
+                    padding: '1rem',
                 }}
             >
                 <div
                     className="p-card p-shadow-3 p-p-4"
                     style={{
-                        width: '400px',
-                        borderRadius: '8px',
-                        background: '#ffffff',
+                        width: '500px',
+                        borderRadius: '12px',
+                        background: '#fff',
+                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
                     }}
                 >
                     <h2
-                        className="p-text-center p-mb-4"
-                        style={{ color: '#333', fontWeight: 'bold' }}
+                        className="p-text-center"
+                        style={{
+                            color: '#333',
+                            fontWeight: 'bold',
+                            fontSize: '1.5rem',
+                            marginBottom: '2rem',
+                            textAlign: 'center',
+                        }}
                     >
-                        Registrate en nuestra plataforma
+                        Regístrate en nuestra plataforma
                     </h2>
                     <form onSubmit={handleSubmit}>
-                        <div className="p-field p-mb-3">
-                            <label htmlFor="username">Nombre de Usuario</label>
+                        {/** Estilo de los campos en fila */}
+                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <label
+                                htmlFor="username"
+                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
+                            >
+                                Usuario:
+                            </label>
                             <InputText
                                 id="username"
                                 name="username"
                                 value={formData.username}
                                 onChange={handleChange}
                                 placeholder="Ingresa tu nombre de usuario"
-                                className="p-inputtext-sm p-d-block"
+                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3">
-                            <label htmlFor="name">Nombres</label>
+                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <label
+                                htmlFor="name"
+                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
+                            >
+                                Nombres:
+                            </label>
                             <InputText
                                 id="name"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Ingresa tu nombre"
-                                className="p-inputtext-sm p-d-block"
+                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3">
-                            <label htmlFor="lastname">Apellidos</label>
+                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <label
+                                htmlFor="lastname"
+                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
+                            >
+                                Apellidos:
+                            </label>
                             <InputText
                                 id="lastname"
                                 name="lastname"
                                 value={formData.lastname}
                                 onChange={handleChange}
                                 placeholder="Ingresa tus apellidos"
-                                className="p-inputtext-sm p-d-block"
+                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3">
-                            <label htmlFor="email">Email</label>
+                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <label
+                                htmlFor="email"
+                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
+                            >
+                                Email:
+                            </label>
                             <InputText
                                 id="email"
                                 name="email"
@@ -112,11 +137,16 @@ const Signup = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Ingresa tu email"
-                                className="p-inputtext-sm p-d-block"
+                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3" style={{ marginBottom: '1.5rem' }}>
-                            <label htmlFor="password">Contraseña</label>
+                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <label
+                                htmlFor="password"
+                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
+                            >
+                                Contraseña:
+                            </label>
                             <Password
                                 id="password"
                                 name="password"
@@ -125,28 +155,42 @@ const Signup = () => {
                                 toggleMask
                                 placeholder="Ingresa tu contraseña"
                                 feedback={false}
-                                className="p-inputtext-sm p-d-block"
+                                style={{ flex: 1 }}
                             />
                         </div>
                         <Button
                             type="submit"
                             label="Registrarse"
-                            className="p-mt-3 p-py-2 p-px-4 p-button-rounded"
+                            className="p-mt-3"
                             style={{
                                 width: '100%',
                                 backgroundColor: '#6C63FF',
                                 border: 'none',
+                                color: '#fff',
+                                fontSize: '1rem',
+                                padding: '0.75rem',
+                                borderRadius: '8px',
                             }}
                         />
-                        {response && response.success && (<Message severity="success" text={response.message} />
+                        {response && response.success && (
+                            <Message
+                                severity="success"
+                                text={response.message}
+                                style={{ marginTop: '1rem', textAlign: 'center' }}
+                            />
                         )}
-                        {response && !response.success && (<Message severity="error" text={response.message} />
+                        {response && !response.success && (
+                            <Message
+                                severity="error"
+                                text={response.message}
+                                style={{ marginTop: '1rem', textAlign: 'center' }}
+                            />
                         )}
                     </form>
                 </div>
             </div>
         </>
-      );
-   }
+    );
+};
 
 export default Signup;

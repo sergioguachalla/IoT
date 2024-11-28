@@ -34,7 +34,7 @@ const LoginForm = () => {
             password
         };
         setIsLoading(true);
-        axios.post("http://192.168.1.202:8000/users/auth", credentials)
+        axios.post(`${process.env.REACT_APP_API_URL}/users/auth`, credentials)
             .then((response) => {
                 console.log(response.data);
                 setIsLoading(false);

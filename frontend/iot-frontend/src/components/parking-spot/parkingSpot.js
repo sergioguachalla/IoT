@@ -41,7 +41,7 @@ const ParkingSpot = () => {
   };
   const getCars = async () => {
    try {
-      const response = await axios.get(`http://localhost:8000/users/${userInformation.id}/cars`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/${userInformation.id}/cars`);
       console.log(response);
       const cars2 = response.data.map((car) => {
          return {
@@ -87,7 +87,7 @@ const ParkingSpot = () => {
          return;
       }
       console.log(formData);
-      const response = axios.post(`http://localhost:8000/users/parking_record`, formData);
+      const response = axios.post(`${process.env.REACT_APP_API_URL}/users/parking_record`, formData);
       console.log(response);
 
 };

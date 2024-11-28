@@ -15,7 +15,7 @@ const UserRecords = () => {
       if (infoObject) {
          setInfo(infoObject);
          setTimeout(() => {
-            axios.get(`http://192.168.1.202:8000/users/${infoObject.id}/records`)
+            axios.get(`${process.env.REACT_APP_API_URL}/users/${infoObject.id}/records`)
                .then(response => {
                   setRecords(response.data);
                   setLoading(false);
