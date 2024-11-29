@@ -3,6 +3,7 @@ import os
 from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, Query
 from sqlalchemy.orm import Session
 from cars_bl import get_cars_by_user_id, save_car
+from mail_bl import send_email
 from records_bl import get_record_by_user_id, save_parking_record, save_record, update_parking_record
 from database import SessionLocal, engine
 from models import Base, Car, User
@@ -122,3 +123,12 @@ def update_parking_record_time(record_id: int, db: Session = Depends(get_db)):
     else:
         response = ResponseDto(message="Error al actualizar el registro de parqueo", data=None, success=False)
     return response
+
+
+@app.post("/users/mail", response_model=None)
+def send_email_api(subject: str, body: str, to_email: str):
+    subject = subject
+    body = body
+    to_email = to_email
+    send_email(subject, body, to_email)
+    return {"message": "Email sent successfully"}
