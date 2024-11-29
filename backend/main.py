@@ -80,6 +80,7 @@ def get_records_history(user_id: int, db: Session = Depends(get_db)):
 @app.post("/upload/")
 async def upload_video(user_id: int, 
                        location: str,
+                       parking_record_id: int,
                        file: UploadFile = File(...),
                          db: Session = Depends(get_db)):
     try:
@@ -100,7 +101,7 @@ async def upload_video(user_id: int,
 
     
 
-    record_db = RecordCreate(user_id=user_id, location=location, video_url=file_url)
+    record_db = RecordCreate(user_id=user_id, location=location, video_url=file_url, parking_record_id=parking_record_id)
     return save_record(db, record_db)
 
     

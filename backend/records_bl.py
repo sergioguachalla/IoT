@@ -17,6 +17,7 @@ def save_record(db: Session, record: RecordCreate):
          video_url=record.video_url,
          location=record.location,
          created_at= datetime.now(),
+         parking_record_id=record.parking_record_id
     )
     print("db_record", db_record)
     db.add(db_record)

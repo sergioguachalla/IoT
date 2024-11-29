@@ -30,6 +30,7 @@ class UserAuth(BaseModel):
 class RecordBase(BaseModel):
     user_id: int
     location: str
+    parking_record_id: int 
     
 class RecordCreate(RecordBase):
     video_url: str
