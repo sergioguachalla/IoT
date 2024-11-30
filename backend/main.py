@@ -11,7 +11,7 @@ from schemas import CarBase, ParkingRecordBase, ResponseDto, User, UserAuth, Use
 from user_bl import create_user, auth, get_all_users
 from google_bl import upload_video_to_drive
 from fastapi.middleware.cors import CORSMiddleware
-
+from dashboard_bl import get_all_records
 app = FastAPI()
 origins = [
     "http://localhost:3000",
@@ -132,3 +132,8 @@ def send_email_api(subject: str, body: str, to_email: str):
     to_email = to_email
     send_email(subject, body, to_email)
     return {"message": "Email sent successfully"}
+
+
+@app.get("/records/all")
+def find_all_records(db: Session = Depends(get_db)):
+    return get_all_records(db)

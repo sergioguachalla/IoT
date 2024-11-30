@@ -12,10 +12,10 @@ const Navbar = () => {
     const item = info ? {label: info.username, action: () => window.location.href = "/profile"} : {label: 'Iniciar Sesión', command: () => window.location.href = "/login"};
     const items = [
         { label: 'Inicio', icon: 'pi pi-home', command: () => window.location.href = "/" },
-        { label: 'Registrar', icon: 'pi pi-star',
+        { label: 'Registros', icon: 'pi pi-star',
             items: [
-                { label: 'Carro', icon: 'pi pi-info', command: () => window.location.href = "/feature1" },
-                { label: 'Parqueo', icon: 'pi pi-info-circle', command: () => window.location.href = "/feature2" }
+                { label: 'Mis registros', icon: 'pi pi-info', command: () => window.location.href = "/my-records" },
+                { label: 'Parqueo', icon: 'pi pi-info-circle', command: () => window.location.href = "/parking-spot" }
             ]
         },
         { label: 'Registrarse', icon: 'pi pi-info', command: () => window.location.href = "/signup" },
