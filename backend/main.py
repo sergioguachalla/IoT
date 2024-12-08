@@ -103,7 +103,7 @@ async def upload_video(user_id: int,
     
 
     record_db = RecordCreate(user_id=user_id, location=location, video_url=file_url, parking_record_id=parking_record_id)
-    return save_record(db, record_db)
+    return save_record(db, record_db, file_url)
 
     
 @app.post("/users/parking_record", response_model=ResponseDto)
@@ -127,8 +127,5 @@ def update_parking_record_time(record_id: int, db: Session = Depends(get_db)):
 
 @app.post("/users/mail", response_model=None)
 def send_email_api(subject: str, body: str, to_email: str):
-    subject = subject
-    body = body
-    to_email = to_email
     send_email(subject, body, to_email)
     return {"message": "Email sent successfully"}

@@ -6,10 +6,10 @@ from sqlalchemy.orm import Session
 from schemas import  ParkingRecordBase, RecordCreate, RecordDb
 from models import Record, ParkingRecord
 from google_bl import upload_video_to_drive
+from mail_bl import send_email
+from user_bl import get_user_by_id
 
- 
-
-def save_record(db: Session, record: RecordCreate):
+def save_record(db: Session, record: RecordCreate, video_url: str):
     
 
     db_record = Record(
@@ -23,6 +23,8 @@ def save_record(db: Session, record: RecordCreate):
     db.add(db_record)
     db.commit()
     db.refresh(db_record)
+    user = get_user_by_id(db, record.user_id)
+    send_email("Notificación de estacionamiento", user.email, f"Se ha registrado movimiento cerca de su auto en {record.location}.", video_url)
     return db_record
 
 
