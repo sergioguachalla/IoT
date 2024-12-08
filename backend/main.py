@@ -1,6 +1,7 @@
 
 import os
-from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, Query
+from typing import List
+from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
 from cars_bl import get_cars_by_user_id, save_car
 from mail_bl import send_email
@@ -11,6 +12,9 @@ from schemas import CarBase, ParkingRecordBase, ResponseDto, User, UserAuth, Use
 from user_bl import create_user, auth, get_all_users
 from google_bl import upload_video_to_drive
 from fastapi.middleware.cors import CORSMiddleware
+from dashboard_bl import get_dashboard_data
+import asyncio
+import random
 
 app = FastAPI()
 origins = [
@@ -29,7 +33,6 @@ app.add_middleware(
 Base.metadata.create_all(bind=engine)
 
 
-
 def get_db():
     db = SessionLocal()
     try:
@@ -37,6 +40,28 @@ def get_db():
     finally:
         db.close()
 
+
+
+# Websocket configuration
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+
+    async def send_message(self, message: str):
+        for connection in self.active_connections:
+            try:
+                await connection.send_text(message)
+            except Exception:
+                self.disconnect(connection)
+
+manager = ConnectionManager()
 
 @app.post("/users/", response_model=ResponseDto)
 def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
@@ -125,7 +150,16 @@ def update_parking_record_time(record_id: int, db: Session = Depends(get_db)):
     return response
 
 
-@app.post("/users/mail", response_model=None)
-def send_email_api(subject: str, body: str, to_email: str):
-    send_email(subject, body, to_email)
-    return {"message": "Email sent successfully"}
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            db = next(get_db())
+            # Backend sends random data to simulate updates
+            data = get_dashboard_data(db)
+            await manager.send_message(f"{data}")
+            await asyncio.sleep(2)  # Simulate data push every 2 seconds
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        db.close()
