@@ -1,0 +1,99 @@
+/* src/components/parkingSpot/ParkingSpot.css */
+
+/* Contenedor Principal */
+.parking-spot-container {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Títulos */
+  .parking-spot-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .parking-spot-container p {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario */
+  .form-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+  
+  /* Campos del Formulario */
+  .form-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #2c3e50;
+  }
+  
+  .form-container .p-dropdown {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .form-container .p-inputtext {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+  }
+  
+  .form-container .p-inputtext:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+    outline: none;
+  }
+  
+  /* Botones */
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group .p-button {
+    flex: 1;
+    margin: 5px;
+  }
+  
+  .button-group .p-button:first-child {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+    border: none;
+  }
+  
+  .button-group .p-button:first-child:hover {
+    background-color: #138496 !important;
+  }
+  
+  .button-group .p-button:last-child {
+    background-color: #28a745 !important;
+    color: #fff !important;
+    border: none;
+  }
+  
+  .button-group .p-button:last-child:hover {
+    background-color: #218838 !important;
+  }
+  

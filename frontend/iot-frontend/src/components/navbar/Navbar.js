@@ -25,6 +25,12 @@ const Navbar = () => {
         { label: "Parqueo", icon: "pi pi-info-circle", command: () => (window.location.href = "/parking-spot") },
       ],
     },
+    { label: "Automóviles", icon: "pi pi-car", 
+      items: [
+        { label: "Registrar Automóvil", icon: "pi pi-plus", command: () => (window.location.href = "/register-car") },
+        { label: "Mis Autos", icon: "pi pi-list", command: () => (window.location.href = "/my-cars") },
+      ],
+    },
     { label: "Registrarse", icon: "pi pi-info", command: () => (window.location.href = "/signup") },
     {
       label: item.label,
