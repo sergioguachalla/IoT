@@ -32,6 +32,7 @@ const Navbar = () => {
         { label: "Mis Autos", icon: "pi pi-list", command: () => (window.location.href = "/my-cars") },
       ],
     },
+    {label: "Grafico", icon: "pi pi-map-marker", command: () => (window.location.href = "/dashboard")},
     { label: "Registrarse", icon: "pi pi-info", command: () => (window.location.href = "/signup") },
     {
       label: item.label,

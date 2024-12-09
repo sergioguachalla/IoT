@@ -7,6 +7,8 @@ import { Knob } from 'primereact/knob';
 import CountCard from "./countCard";
 const Dashboard = () => {
     const [chartData, setChartData] = useState(null);
+    const [chartOptions, setChartOptions] = useState(null);
+    const [loadingInitial, setLoadingInitial] = useState(true);
     const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [dataDashboard, setDataDashboard] = useState([]);
@@ -45,18 +47,17 @@ const Dashboard = () => {
     };
 
     // Función para obtener los datos del gráfico desde la API
-    const fetchChartData = async (userId) => {
-        setLoading(true); // Mostrar indicador de carga mientras se actualizan los datos
+    const fetchChartData = async (userId, isInitialLoad = false) => {
+        if (isInitialLoad) setLoadingInitial(true);
         try {
             const response = await axios.get(
                 `${process.env.REACT_APP_API_URL}/users/${userId}/records`
             );
             const records = response.data;
-            const wsRecords = dataDashboard.records;
-            console.log(dataDashboard);
+
             // Procesar los datos para el gráfico
             const frequencyByDate = records.reduce((acc, record) => {
-                const date = new Date(record.created_at).toLocaleDateString(); // Convertir a formato de fecha legible
+                const date = new Date(record.created_at).toLocaleDateString();
                 acc[date] = (acc[date] || 0) + 1;
                 return acc;
             }, {});
@@ -78,22 +79,53 @@ const Dashboard = () => {
                 ],
             };
 
+            // Opciones para el gráfico: asegurar valores enteros en el eje Y
+            const options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        ticks: {
+                            stepSize: 1, // Incremento de 1 para que solo muestre enteros
+                            callback: (value) => Number.isInteger(value) ? value : null, // Mostrar solo números enteros
+                        },
+                    },
+                },
+            };
+
             setChartData(data);
+            setChartOptions(options);
         } catch (error) {
             console.error("Error al obtener los datos del gráfico:", error);
         } finally {
-            setLoading(false); // Ocultar indicador de carga después de actualizar los datos
+            if (isInitialLoad) setLoadingInitial(false);
         }
     };
+
+    useEffect(() => {
+        const userInfo = fetchUserInfo();
+        if (userInfo) {
+            fetchChartData(userInfo.id, true);
+
+            // Establecer un intervalo para actualizar los datos cada 5 segundos
+            const intervalId = setInterval(() => {
+                fetchChartData(userInfo.id, false);
+            }, 10000);
+
+            return () => clearInterval(intervalId);
+        } else {
+            setLoadingInitial(false);
+        }
+    }, []);
+
 
 
 
     const handleRefreshData = () => {
         if (userInfo) {
-            fetchChartData(userInfo.id);
+            fetchChartData(userInfo.id, false);
         }
     };
-
     return (
         <div>
             <Navbar />
@@ -102,10 +134,10 @@ const Dashboard = () => {
 
             <div style={{ margin: "20px auto", maxWidth: "600px" }}>
                 <h3 style={{ textAlign: "center" }}>Gráfico de Frecuencia de Registros</h3>
-                {loading ? (
+                {loadingInitial ? (
                     <p>Cargando datos del gráfico...</p>
                 ) : chartData ? (
-                    <Chart type="bar" data={chartData} />
+                    <Chart type="bar" data={chartData} options={chartOptions}/>
                 ) : (
                     <p>No hay datos disponibles para el gráfico.</p>
                 )}
@@ -126,17 +158,17 @@ const Dashboard = () => {
                 />
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: "20px", margin: "20px auto" }}>
-  
-  <div style={{ textAlign: "center", flex: 1 }}>
-    <h3 style={{ marginBottom: "10px", color: "#333" }}>Número de Usuarios</h3>
-    <CountCard value={usersCount} maxValue={50} title="Usuarios Registrados" />
-  </div>
 
-  <div style={{ textAlign: "center", flex: 1 }}>
-    <h3 style={{ marginBottom: "10px", color: "#333" }}>Cantidad de Fotografías Tomadas</h3>
-    <CountCard value={recordsCount} maxValue={50} title="Fotografías Tomadas" />
-  </div>
-</div>
+                <div style={{ textAlign: "center", flex: 1 }}>
+                    <h3 style={{ marginBottom: "10px", color: "#333" }}>Número de Usuarios</h3>
+                    <CountCard value={usersCount} maxValue={50} title="Usuarios Registrados" />
+                </div>
+
+                <div style={{ textAlign: "center", flex: 1 }}>
+                    <h3 style={{ marginBottom: "10px", color: "#333" }}>Cantidad de Fotografías Tomadas</h3>
+                    <CountCard value={recordsCount} maxValue={50} title="Fotografías Tomadas" />
+                </div>
+            </div>
         </div>
     );
 };
