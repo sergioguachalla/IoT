@@ -12,6 +12,7 @@ import UserRecords from './components/user-records/userRecords';
 import ParkingSpot from './components/parking-spot/parkingSpot';
 import Dashboard from './components/dashboard/dashboard-user';
 import RegisterCar from './components/car-register/RegisterCar';
+import RecordTable from './components/panel/recordTable';
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -30,6 +31,7 @@ root.render(
                 <Route path="/parking-spot" element={<ParkingSpot />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/register-car" element={<RegisterCar />} />
+                <Route path="/record-table" element={<RecordTable />} />
             </Routes>
         </Router>
     </PrimeReactProvider>

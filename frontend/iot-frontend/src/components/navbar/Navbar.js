@@ -24,6 +24,7 @@ const Navbar = () => {
       items: [
         { label: "Mis registros", icon: "pi pi-info", command: () => (window.location.href = "/my-records") },
         { label: "Parqueo", icon: "pi pi-info-circle", command: () => (window.location.href = "/parking-spot") },
+        { label: 'Panel de actividades', icon: 'pi pi-info-circle', command: () => window.location.href = "/record-table" }
       ],
     },
     { label: "Automóviles", icon: "pi pi-car", 
