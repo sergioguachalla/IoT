@@ -29,7 +29,7 @@ const Navbar = () => {
     { label: "Automóviles", icon: "pi pi-car", 
       items: [
         { label: "Registrar Automóvil", icon: "pi pi-plus", command: () => (window.location.href = "/register-car") },
-        { label: "Mis Autos", icon: "pi pi-list", command: () => (window.location.href = "/my-cars") },
+        //{ label: "Mis Autos", icon: "pi pi-list", command: () => (window.location.href = "/my-cars") },
       ],
     },
     {label: "Grafico", icon: "pi pi-map-marker", command: () => (window.location.href = "/dashboard")},

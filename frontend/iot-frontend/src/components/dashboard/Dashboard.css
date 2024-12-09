@@ -1,0 +1,81 @@
+/* Contenedor Principal */
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f6f9;
+    min-height: 100vh;
+}
+
+/* Encabezado */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.dashboard-header p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Contenedor del Gráfico */
+.chart-container {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Botón de Actualizar */
+.refresh-button-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.refresh-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.refresh-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Contenedor de Estadísticas */
+.statistics-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.statistics-container > div {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+}
+
+.statistics-container h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
