@@ -1,0 +1,31 @@
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: iot
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
+    networks:
+      - iot-network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - "8025:8025"   
+      - "1025:1025"   
+    networks:
+      - iot-network
+
+volumes:
+  postgres_data:
+
+networks:
+  iot-network:
+    driver: bridge

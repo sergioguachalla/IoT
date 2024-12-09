@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "e616bdcd-ba4a-40d4-864b-91104a4a8b17",
+		"name": "IoT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38962918"
+	},
+	"item": [
+		{
+			"name": "Upload video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Sergio/Videos/bugs/sk-458.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/upload/?user_id=1&location=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"upload",
+						""
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "location",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"name\": \"Sergio\",\r\n    \"lastname\": \"Guachalla\",\r\n    \"email\": \"sergioguachalla@gmail.com\",\r\n    \"password\": \"admin1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Sergio/Videos/bugs/sk-455.mkv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/upload/?user_id=1&location=test222222",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"upload",
+						""
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "location",
+							"value": "test222222"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/users/auth",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/users/all",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register a user's car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1,\r\n    \"brand\": \"Toyota\",\r\n    \"plate\": \"1233ABC\",\r\n    \"color\": \"Negro\",\r\n    \"model\": \"2024\",\r\n    \"year\": 2024\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/users/car",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"car"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user's cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/users/1/cars",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user's records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/users/1/records",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a parking record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1,\r\n    \"car_id\": 1,\r\n    \"latitude\": \"-16.5116\",\r\n    \"longitude\": \"-68.1382\",\r\n    \"location\": \"Calle Valentin Abecia, La Paz, Bolivia\",\r\n    \"end_time\": null\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/users/parking_record",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"parking_record"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update parking record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/users/parking_record/1/",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"parking_record",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
