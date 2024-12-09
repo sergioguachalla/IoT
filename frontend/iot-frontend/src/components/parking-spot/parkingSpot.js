@@ -10,7 +10,7 @@ const ParkingSpot = () => {
   const GEO_API_KEY = process.env.REACT_APP_GEO_API_KEY;
   const [location, setLocation] = useState(null);
   const [cars, setCars] = useState([]);
-  const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedCar, setSelectedCar] = useState(1);
   const [formData, setFormData] = useState({
     user_id: userInformation?.id || null,
     location: "",
@@ -122,7 +122,7 @@ const ParkingSpot = () => {
             id="car"
             value={selectedCar}
             options={cars}
-            onChange={(e) => setSelectedCar(e.value)}
+            onChange={(e) => {setSelectedCar(e.value)}}
             placeholder="Selecciona un carro"
           />
         </div>

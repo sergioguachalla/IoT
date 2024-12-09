@@ -9,11 +9,11 @@ import "./RegisterCar.css";
 
 const RegisterCar = () => {
   const [formData, setFormData] = useState({
-    car_brand: "",
-    car_plate: "",
-    car_color: "",
-    car_model: "",
-    car_year: "",
+    brand: "",
+    plate: "",
+    color: "",
+    model: "",
+    year: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -67,24 +67,24 @@ const RegisterCar = () => {
         <h1>Registrar Automóvil</h1>
         <form className="register-car-form" onSubmit={handleSubmit}>
           <div className="p-field">
-            <label htmlFor="car_brand">Marca</label>
-            <InputText id="car_brand" name="car_brand" value={formData.car_brand} onChange={handleChange} required placeholder="Ejemplo: Toyota" />
+            <label htmlFor="brand">Marca</label>
+            <InputText id="brand" name="brand" value={formData.brand} onChange={handleChange} required placeholder="Ejemplo: Toyota" />
           </div>
           <div className="p-field">
-            <label htmlFor="car_plate">Matrícula</label>
-            <InputText id="car_plate" name="car_plate" value={formData.car_plate} onChange={handleChange} required placeholder="Ejemplo: ABC-1234" />
+            <label htmlFor="plate">Matrícula</label>
+            <InputText id="plate" name="plate" value={formData.plate} onChange={handleChange} required placeholder="Ejemplo: ABC-1234" />
           </div>
           <div className="p-field">
-            <label htmlFor="car_color">Color</label>
-            <InputText id="car_color" name="car_color" value={formData.car_color} onChange={handleChange} required placeholder="Ejemplo: Rojo" />
+            <label htmlFor="color">Color</label>
+            <InputText id="color" name="color" value={formData.color} onChange={handleChange} required placeholder="Ejemplo: Rojo" />
           </div>
           <div className="p-field">
-            <label htmlFor="car_model">Modelo</label>
-            <InputText id="car_model" name="car_model" value={formData.car_model} onChange={handleChange} required placeholder="Ejemplo: Corolla" />
+            <label htmlFor="model">Modelo</label>
+            <InputText id="model" name="model" value={formData.model} onChange={handleChange} required placeholder="Ejemplo: Corolla" />
           </div>
           <div className="p-field">
-            <label htmlFor="car_year">Año</label>
-            <InputText id="car_year" name="car_year" value={formData.car_year} onChange={handleChange} required placeholder="Ejemplo: 2021" type="number" />
+            <label htmlFor="year">Año</label>
+            <InputText id="year" name="year" value={formData.year} onChange={handleChange} required placeholder="Ejemplo: 2021" type="number" />
           </div>
           <Button label="Registrar Automóvil" icon="pi pi-save" loading={loading} className="p-button-primary" />
         </form>
