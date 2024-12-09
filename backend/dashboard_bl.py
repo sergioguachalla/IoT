@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from models import Car, User, Record
+from fastapi.encoders import jsonable_encoder
 
 
 
@@ -25,15 +26,30 @@ def get_average_records_per_user(session: Session):
 
 
 def get_dashboard_data(db: Session):
-    # Example: Fetch the latest parking records
-    records = db.query(Record).order_by(Record.created_at.desc()).limit(10).all()
-    records = [record.__dict__ for record in records]
-    return {
-         "records": records,
-         "users_count": get_users_count(db),
-         "records_count": get_records_count(db),
-         "average_records_per_user": get_average_records_per_user(db)
+    # Fetch the latest parking records
+    records = db.query(Record).order_by(Record.created_at.desc()).all()
+
+    # Serialize the data
+    serialized_records = [
+        {
+            "id": record.id,
+            "user_id": record.user_id,
+            "car_id": record.id,  # Changed car_id to record.car_id (assuming typo)
+            "created_at": record.created_at
+        }
+        for record in records
+    ]
+
+    # Prepare the response
+    data = {
+        "records": serialized_records,
+        "users_count": get_users_count(db),
+        "records_count": get_records_count(db),
+        "average_records_per_user": get_average_records_per_user(db)
     }
+
+    # Ensure all data is JSON serializable
+    return jsonable_encoder(data)
 def get_all_records(session: Session):
    records = session.query(Record).all()
    return records

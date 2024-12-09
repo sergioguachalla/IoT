@@ -13,7 +13,7 @@ from google_bl import upload_video_to_drive
 from fastapi.middleware.cors import CORSMiddleware
 from dashboard_bl import get_dashboard_data, get_all_records
 import asyncio
-import random
+import json
 
 
 # Instancia de la aplicación FastAPI
@@ -161,14 +161,14 @@ def update_parking_record_time(record_id: int, db: Session = Depends(get_db)):
 
 
 @app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+async def websocket_endpoint(websocket: WebSocket, db: Session = Depends(get_db)):
     await manager.connect(websocket)
     try:
         while True:
-            db = next(get_db())
+            
             # Backend sends random data to simulate updates
             data = get_dashboard_data(db)
-            await manager.send_message(f"{data}")
+            await manager.send_message(json.dumps(data))
             await asyncio.sleep(2)  # Simulate data push every 2 seconds
     except WebSocketDisconnect:
         manager.disconnect(websocket)
