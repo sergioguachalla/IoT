@@ -10,6 +10,7 @@ import Home from './components/home/Home';
 import Signup from './components/signup/Signup';
 import UserRecords from './components/user-records/userRecords';
 import ParkingSpot from './components/parking-spot/parkingSpot';
+import Dashboard from './components/dashboard/dashboard-user';
 import RegisterCar from './components/car-register/RegisterCar';
 
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -27,6 +28,7 @@ root.render(
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/my-records" element={<UserRecords />} />
                 <Route path="/parking-spot" element={<ParkingSpot />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/register-car" element={<RegisterCar />} />
             </Routes>
         </Router>
