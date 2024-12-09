@@ -1,5 +1,17 @@
 
 services:
+  iot-backend:
+    image: iot-backend
+    container_name: iot-backend
+    environment:
+      DB_URL: postgresql://postgres:postgres@postgres:5432/iot
+    ports:
+      - "8000:8000"
+    networks:
+      - iot-network
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:latest
     container_name: postgres
@@ -22,9 +34,6 @@ services:
       - "1025:1025"   
     networks:
       - iot-network
-
-volumes:
-  postgres_data:
 
 networks:
   iot-network:

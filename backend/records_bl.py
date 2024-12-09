@@ -3,9 +3,12 @@ from sqlalchemy.orm import Session
 from schemas import ParkingRecordBase, RecordCreate
 from models import Record, ParkingRecord
 from google_bl import upload_video_to_drive
+from mail_bl import send_email
+from user_bl import get_user_by_id
 
 # Guardar un nuevo registro multimedia en la base de datos
-def save_record(db: Session, record: RecordCreate):
+def save_record(db: Session, record: RecordCreate, video_url: str):
+  
     db_record = Record(
          user_id=record.user_id,
          video_url=record.video_url,
@@ -13,9 +16,13 @@ def save_record(db: Session, record: RecordCreate):
          created_at=datetime.now(),
          parking_record_id=record.parking_record_id
     )
+    print("db_record", db_record)
     db.add(db_record)  # Agregar el registro a la sesión de la base de datos
     db.commit()  # Confirmar los cambios en la base de datos
     db.refresh(db_record)  # Actualizar la instancia con los datos guardados
+    user = get_user_by_id(db, record.user_id)
+    send_email("Notificación de estacionamiento", user.email, f"Se ha registrado movimiento cerca de su auto en {record.location}.", video_url)
+
     return db_record
 
 # Obtener todos los registros multimedia de un usuario

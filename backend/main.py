@@ -1,5 +1,6 @@
 import os
-from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, Query
+from typing import List
+from fastapi import FastAPI, Depends, File, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
 from cars_bl import get_cars_by_user_id, save_car
 from mail_bl import send_email
@@ -10,7 +11,10 @@ from schemas import CarBase, ParkingRecordBase, ResponseDto, User, UserAuth, Use
 from user_bl import create_user, auth, get_all_users
 from google_bl import upload_video_to_drive
 from fastapi.middleware.cors import CORSMiddleware
-from dashboard_bl import get_all_records
+from dashboard_bl import get_dashboard_data, get_all_records
+import asyncio
+import random
+
 
 # Instancia de la aplicación FastAPI
 app = FastAPI()
@@ -32,13 +36,39 @@ app.add_middleware(
 # Inicializar la base de datos creando las tablas definidas en los modelos
 Base.metadata.create_all(bind=engine)
 
+
 # Dependencia para obtener una sesión de base de datos
+
 def get_db():
     db = SessionLocal()
     try:
         yield db  # Proporciona la sesión a las rutas
     finally:
         db.close()  # Cierra la sesión al finalizar
+
+
+
+# Websocket configuration
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+
+    async def send_message(self, message: str):
+        for connection in self.active_connections:
+            try:
+                await connection.send_text(message)
+            except Exception:
+                self.disconnect(connection)
+
+manager = ConnectionManager()
+
 
 # Endpoint para crear un nuevo usuario
 @app.post("/users/", response_model=ResponseDto)
@@ -108,7 +138,7 @@ async def upload_video(user_id: int,
 
     # Crear un registro del archivo subido en la base de datos
     record_db = RecordCreate(user_id=user_id, location=location, video_url=file_url, parking_record_id=parking_record_id)
-    return save_record(db, record_db)
+    return save_record(db, record_db, file_url)
 
 # Endpoint para crear un registro de parqueo
 @app.post("/users/parking_record", response_model=ResponseDto)
@@ -127,6 +157,22 @@ def update_parking_record_time(record_id: int, db: Session = Depends(get_db)):
     else:
         response = ResponseDto(message="Error al actualizar el registro de parqueo", data=None, success=False)
     return response
+
+
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            db = next(get_db())
+            # Backend sends random data to simulate updates
+            data = get_dashboard_data(db)
+            await manager.send_message(f"{data}")
+            await asyncio.sleep(2)  # Simulate data push every 2 seconds
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        db.close()
 
 # Endpoint para enviar un correo electrónico
 @app.post("/users/mail", response_model=None)
