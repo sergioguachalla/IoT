@@ -1,0 +1,64 @@
+/* src/components/registerCar/RegisterCar.css */
+
+.register-car-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .register-car-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .register-car-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .p-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .p-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .p-field input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .p-field input:focus {
+    border-color: #4facfe;
+    outline: none;
+    box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+  }
+  
+  .p-button-primary {
+    background: #4facfe;
+    border: none;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .p-button-primary:hover {
+    background: #00d4ff;
+  }
+  
+  .p-button-primary:disabled {
+    background: #b2bec3;
+  }
+  

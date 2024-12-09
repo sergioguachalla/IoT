@@ -1,33 +1,127 @@
 /* src/components/LoginForm.css */
+
+/* Contenedor Principal del Formulario */
 .login-form-container {
     max-width: 400px;
-    margin: 2rem auto;
+    margin: 3rem auto;
     padding: 2rem;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
 }
 
+/* Títulos */
+.login-form-container h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* Campos del Formulario */
 .field {
     margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.block {
+.field label {
+    font-size: 1rem;
     font-weight: bold;
+    color: #555;
     margin-bottom: 0.5rem;
 }
 
-.w-full {
-    width: 100%;
+.field input,
+.field .p-password-input {
+    padding: 0.75rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.field input:focus,
+.field .p-password-input:focus {
+    border-color: #007ad9;
+    box-shadow: 0 0 4px rgba(0, 122, 217, 0.5);
+    outline: none;
+}
+
+/* Botón */
+.p-button-primary {
+    background-color: #007ad9 !important;
+    border: none !important;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem !important;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.p-button-primary:hover {
+    background-color: #005bb5 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.p-button-primary:disabled {
+    background-color: #b3d7f7 !important;
+    cursor: not-allowed;
+}
+
+/* Progreso de Carga */
+.p-progressbar {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.p-progressbar .p-progressbar-value {
+    background-color: #007ad9 !important;
+}
+
+/* Mensajes de Error y Éxito */
+.p-message {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.p-message-error {
+    background-color: #ffebeb !important;
+    border-color: #f5c6cb !important;
+    color: #721c24 !important;
+}
+
+.p-message-success {
+    background-color: #e8f5e9 !important;
+    border-color: #c3e6cb !important;
+    color: #155724 !important;
+}
+
+/* Enlace de Registro */
 .signup-link {
     color: #007ad9;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .signup-link:hover {
     text-decoration: underline;
+    color: #005bb5;
+}
+
+/* Estilo del Contenedor */
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.text-center {
+    text-align: center;
 }

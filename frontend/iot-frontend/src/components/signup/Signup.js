@@ -6,6 +6,7 @@ import Navbar from '../navbar/Navbar';
 import axios from 'axios';
 import { Message } from 'primereact/message';
 import { useNavigate } from 'react-router-dom';
+import './Signup.css';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -42,94 +43,42 @@ const Signup = () => {
     return (
         <>
             <Navbar />
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: 'calc(100vh - 60px)',
-                    background: '#f9f9f9',
-                    padding: '1rem',
-                }}
-            >
-                <div
-                    className="p-card p-shadow-3 p-p-4"
-                    style={{
-                        width: '500px',
-                        borderRadius: '12px',
-                        background: '#fff',
-                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-                    }}
-                >
-                    <h2
-                        className="p-text-center"
-                        style={{
-                            color: '#333',
-                            fontWeight: 'bold',
-                            fontSize: '1.5rem',
-                            marginBottom: '2rem',
-                            textAlign: 'center',
-                        }}
-                    >
-                        Regístrate en nuestra plataforma
-                    </h2>
+            <div className="signup-container">
+                <div className="signup-card">
+                    <h2>Regístrate en nuestra plataforma</h2>
                     <form onSubmit={handleSubmit}>
-                        {/** Estilo de los campos en fila */}
-                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <label
-                                htmlFor="username"
-                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
-                            >
-                                Usuario:
-                            </label>
+                        <div className="signup-field">
+                            <label htmlFor="username">Usuario:</label>
                             <InputText
                                 id="username"
                                 name="username"
                                 value={formData.username}
                                 onChange={handleChange}
                                 placeholder="Ingresa tu nombre de usuario"
-                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <label
-                                htmlFor="name"
-                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
-                            >
-                                Nombres:
-                            </label>
+                        <div className="signup-field">
+                            <label htmlFor="name">Nombres:</label>
                             <InputText
                                 id="name"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Ingresa tu nombre"
-                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <label
-                                htmlFor="lastname"
-                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
-                            >
-                                Apellidos:
-                            </label>
+                        <div className="signup-field">
+                            <label htmlFor="lastname">Apellidos:</label>
                             <InputText
                                 id="lastname"
                                 name="lastname"
                                 value={formData.lastname}
                                 onChange={handleChange}
                                 placeholder="Ingresa tus apellidos"
-                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <label
-                                htmlFor="email"
-                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
-                            >
-                                Email:
-                            </label>
+                        <div className="signup-field">
+                            <label htmlFor="email">Email:</label>
                             <InputText
                                 id="email"
                                 name="email"
@@ -137,16 +86,10 @@ const Signup = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Ingresa tu email"
-                                style={{ flex: 1 }}
                             />
                         </div>
-                        <div className="p-field p-mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <label
-                                htmlFor="password"
-                                style={{ fontWeight: '500', color: '#555', width: '120px', textAlign: 'right', marginRight: '1rem' }}
-                            >
-                                Contraseña:
-                            </label>
+                        <div className="signup-field">
+                            <label htmlFor="password">Contraseña:</label>
                             <Password
                                 id="password"
                                 name="password"
@@ -155,36 +98,14 @@ const Signup = () => {
                                 toggleMask
                                 placeholder="Ingresa tu contraseña"
                                 feedback={false}
-                                style={{ flex: 1 }}
                             />
                         </div>
-                        <Button
-                            type="submit"
-                            label="Registrarse"
-                            className="p-mt-3"
-                            style={{
-                                width: '100%',
-                                backgroundColor: '#6C63FF',
-                                border: 'none',
-                                color: '#fff',
-                                fontSize: '1rem',
-                                padding: '0.75rem',
-                                borderRadius: '8px',
-                            }}
-                        />
+                        <Button type="submit" label="Registrarse" className="signup-button" />
                         {response && response.success && (
-                            <Message
-                                severity="success"
-                                text={response.message}
-                                style={{ marginTop: '1rem', textAlign: 'center' }}
-                            />
+                            <Message severity="success" text={response.message} className="signup-message" />
                         )}
                         {response && !response.success && (
-                            <Message
-                                severity="error"
-                                text={response.message}
-                                style={{ marginTop: '1rem', textAlign: 'center' }}
-                            />
+                            <Message severity="error" text={response.message} className="signup-message" />
                         )}
                     </form>
                 </div>

@@ -34,3 +34,6 @@ def get_dashboard_data(db: Session):
          "records_count": get_records_count(db),
          "average_records_per_user": get_average_records_per_user(db)
     }
+def get_all_records(session: Session):
+   records = session.query(Record).all()
+   return records

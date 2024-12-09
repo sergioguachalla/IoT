@@ -83,6 +83,7 @@ def send_email(subject: str, to_email: str, body: str, video_url: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error enviando email: {e}")
 
+
 # Endpoint para enviar emails
 @app.post("/users/email")
 async def send_user_email(to_email: str, body: str, subject: str):
