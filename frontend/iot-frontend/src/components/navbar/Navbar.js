@@ -27,7 +27,8 @@ const Navbar = () => {
                     window.location.href = "/login";
                 }
             }   
-        }
+        },
+        {label: 'Grafico', icon: 'pi pi-chart', command: () => window.location.href = "/dashboard" }
         
     ];
 

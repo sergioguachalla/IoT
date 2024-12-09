@@ -10,6 +10,7 @@ import Home from './components/home/Home';
 import Signup from './components/signup/Signup';
 import UserRecords from './components/user-records/userRecords';
 import ParkingSpot from './components/parking-spot/parkingSpot';
+import Dashboard from './components/dashboard/dashboard-user';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,7 @@ root.render(
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/my-records" element={<UserRecords />} />
                 <Route path="/parking-spot" element={<ParkingSpot />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </Router>
     </PrimeReactProvider>
