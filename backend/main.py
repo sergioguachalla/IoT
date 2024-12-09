@@ -184,3 +184,12 @@ def send_email_api(subject: str, body: str, to_email: str):
 @app.get("/records/all")
 def find_all_records(db: Session = Depends(get_db)):
     return get_all_records(db)
+
+@app.post("/users/record", response_model=ResponseDto)
+def create_record(record: RecordCreate, db: Session = Depends(get_db)):
+    if save_record(db, record):
+
+        response = ResponseDto(message="creado existosamente", data=None, success=True)
+    else:
+        response = ResponseDto(message="Error al crear el recor", data=None, success=False)
+    return response

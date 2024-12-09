@@ -47,6 +47,7 @@ CREATE TABLE records (
     video_url VARCHAR(255) NOT NULL,   -- URL of the recorded video
     location VARCHAR(255) NOT NULL,    -- Location where the video was recorded
     created_at TIMESTAMP DEFAULT NOW(),-- Timestamp for when the record was created
+    sensor_aprox INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,  -- Foreign key constraint
     FOREIGN KEY (parking_record_id) REFERENCES parking_records(id) ON DELETE CASCADE  -- Foreign key constraint
 

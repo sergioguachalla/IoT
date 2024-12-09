@@ -41,6 +41,7 @@ class RecordBase(BaseModel):
 # Esquema extendido para crear un registro multimedia
 class RecordCreate(RecordBase):
     video_url: str  # URL del video relacionado con el registro
+    sensor_aprox: int
 
 # Esquema para representar registros multimedia almacenados
 class RecordDb(RecordBase):
@@ -52,6 +53,7 @@ class Record(RecordBase):
     id: int  # ID único del registro
     video_url: str  # URL del video
     created_at: datetime  # Fecha y hora de creación del registro
+    sensor_aprox: int
 
     class Config:
         orm_mode = True  # Habilitar compatibilidad con SQLAlchemy

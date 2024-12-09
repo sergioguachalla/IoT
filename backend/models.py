@@ -47,6 +47,7 @@ class Record(Base):
     video_url = Column(String(255), nullable=False)  # URL del video subido
     location = Column(String(255), nullable=False)  # Ubicación del evento
     created_at = Column(DateTime, default=datetime.datetime.now)  # Fecha y hora de creación
+    sensor_aprox = Column(Integer, nullable=False)
     parking_record_id = Column(Integer, ForeignKey('parking_records.id'), nullable=True)  # Relación con registro de parqueo
 
     # Relación con usuario
