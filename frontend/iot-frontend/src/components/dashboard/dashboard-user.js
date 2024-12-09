@@ -3,12 +3,40 @@ import Navbar from "../navbar/Navbar";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
 import axios from "axios";
-
+import { Knob } from 'primereact/knob';
+import CountCard from "./countCard";
 const Dashboard = () => {
     const [chartData, setChartData] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [dataDashboard, setDataDashboard] = useState([]);
+    const [socket, setSocket] = useState(null);
+    const [usersCount, setUsersCount] = useState(0);
+    const [recordsCount, setRecordsCount] = useState(0);
 
+    useEffect(() => {
+        const userInfo = fetchUserInfo();
+        if (userInfo) {
+            fetchChartData(userInfo.id);
+        } else {
+            setLoading(false);
+        }
+        const socketInstance = new WebSocket('ws://localhost:8000/ws');
+        setSocket(socketInstance);
+        socketInstance.onmessage = (e) => {
+            const dataList = JSON.parse(e.data);
+
+            setDataDashboard((prevData) => [...prevData, dataList]);
+            setUsersCount(dataList.users_count);
+            setRecordsCount(dataList.records_count);
+        };
+      
+          // Cleanup on unmount
+            return () => {
+                socketInstance.close();
+            };
+          
+    }, []);
     // Función para obtener la información del usuario
     const fetchUserInfo = () => {
         const info = JSON.parse(localStorage.getItem("info"));
@@ -24,7 +52,8 @@ const Dashboard = () => {
                 `${process.env.REACT_APP_API_URL}/users/${userId}/records`
             );
             const records = response.data;
-
+            const wsRecords = dataDashboard.records;
+            console.log(dataDashboard);
             // Procesar los datos para el gráfico
             const frequencyByDate = records.reduce((acc, record) => {
                 const date = new Date(record.created_at).toLocaleDateString(); // Convertir a formato de fecha legible
@@ -57,14 +86,7 @@ const Dashboard = () => {
         }
     };
 
-    useEffect(() => {
-        const userInfo = fetchUserInfo();
-        if (userInfo) {
-            fetchChartData(userInfo.id);
-        } else {
-            setLoading(false);
-        }
-    }, []);
+
 
     const handleRefreshData = () => {
         if (userInfo) {
@@ -103,6 +125,18 @@ const Dashboard = () => {
                     }}
                 />
             </div>
+            <div style={{ display: "flex", justifyContent: "center", gap: "20px", margin: "20px auto" }}>
+  
+  <div style={{ textAlign: "center", flex: 1 }}>
+    <h3 style={{ marginBottom: "10px", color: "#333" }}>Número de Usuarios</h3>
+    <CountCard value={usersCount} maxValue={50} title="Usuarios Registrados" />
+  </div>
+
+  <div style={{ textAlign: "center", flex: 1 }}>
+    <h3 style={{ marginBottom: "10px", color: "#333" }}>Cantidad de Fotografías Tomadas</h3>
+    <CountCard value={recordsCount} maxValue={50} title="Fotografías Tomadas" />
+  </div>
+</div>
         </div>
     );
 };
