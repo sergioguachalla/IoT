@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
-import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
+import "./userRecords.css";
 
 const UserRecords = () => {
-
    const [records, setRecords] = useState([]);
    const [info, setInfo] = useState(null);
    const [loading, setLoading] = useState(true);
+
    useEffect(() => {
       const infoObject = JSON.parse(localStorage.getItem('info'));
       if (infoObject) {
@@ -19,73 +20,55 @@ const UserRecords = () => {
                .then(response => {
                   setRecords(response.data);
                   setLoading(false);
-               })
-               
+               });
          }, 300);
       } else {
-          console.warn("No info found in localStorage.");
-          setLoading(false); 
+         console.warn("No info found in localStorage.");
+         setLoading(false); 
       }
-  }, []);
-   
-   const itemTemplate = (record) => {
-      return (
-          <div className="p-card p-shadow-2 p-mb-3" style={{ padding: '16px', borderRadius: '10px', margin: '24px', width: '50%' }}>
-              <h3>{`Location: ${record.location}`}</h3>
-              <p><b>User ID:</b> {record.user_id}</p>
-              <p><b>Created At:</b> {new Date(record.created_at).toLocaleString()}</p>
-              <a 
-                  href={record.video_url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: 'none' }}
-              >
-                  <Button label="Ver Video" className="p-button-rounded p-button-success" />
-              </a>
-          </div>
-      );
-   };
+   }, []);
+
+   const itemTemplate = (record) => (
+      <div className="record-card">
+         <h3>{`Ubicación: ${record.location}`}</h3>
+         <p><b>ID Usuario:</b> {record.user_id}</p>
+         <p><b>Fecha de creación:</b> {new Date(record.created_at).toLocaleString()}</p>
+         <a 
+            href={record.video_url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+         >
+            <Button label="Ver Video" className="p-button-rounded p-button-success" />
+         </a>
+      </div>
+   );
 
    return (
       <div>
-         <Navbar></Navbar>
-         <h1>Mis Registros</h1>
-         {loading && (
-            <div className="border-round border-1 surface-border p-4 surface-card">
-            <div className="flex mb-3">
-           <div>
-               
-               <Skeleton height=".5rem"></Skeleton>
-           </div>
-       </div>
-         <Skeleton width="50%" height="150px" style={
-            {borderRadius: '10px'}
-         }></Skeleton>
-            <div className="flex justify-content-between mt-3">
-         <Skeleton width="50%" height="2rem"></Skeleton>
-           
-            </div>
+         <Navbar />
+         <div className="user-records-container">
+            <h1>Mis Registros</h1>
+            {loading ? (
+               <div className="skeleton-container">
+                  <Skeleton height="2rem" />
+                  <Skeleton width="100%" height="150px" style={{ borderRadius: "10px" }} />
+               </div>
+            ) : records.length === 0 ? (
+               <h2>No hay registros</h2>
+            ) : (
+               <div className="dataview-demo">
+                  <h2>Mis registros</h2>
+                  <p>En esta página podrás ver tus registros.</p>
+                  <DataView
+                     value={records}
+                     layout="list" 
+                     itemTemplate={itemTemplate}
+                     paginator 
+                     rows={3} 
+                  />
+               </div>
+            )}
          </div>
-         )}
-
-         {records.length == 0 ? (
-            <h2>No hay registros</h2>
-         ): (
-
-            <div className="dataview-demo" style={{ padding: '2rem' }}>
-            <h2>Mis registros</h2>
-            <p>En esta página podrás ver tus registros.</p>
-
-            <DataView
-                value={records}
-                layout="list" 
-                itemTemplate={itemTemplate}
-                paginator 
-                rows={3} 
-            />
-        </div>
-
-         )}
       </div>
    );
 };

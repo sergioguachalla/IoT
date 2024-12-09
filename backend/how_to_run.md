@@ -1,4 +1,7 @@
 # Instrucciones
+## Construir la imagen de docker
+> Usar el comando: **`docker build -t iot-backend .`**
+
 ## Hacer correr `docker compose up -d`
 
 ## Instalar las dependencias:

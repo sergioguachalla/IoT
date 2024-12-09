@@ -1,0 +1,46 @@
+/* src/components/navbar/Navbar.css */
+
+.navbar-container {
+    background: linear-gradient(45deg, #dfe6e9, #b2bec3); /* Gradiente gris suave */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+  }
+  
+  .p-menubar {
+    background: transparent !important;
+    border: none !important;
+  }
+  
+  .p-menubar .p-menuitem-link {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: #2d3436 !important; /* Texto gris oscuro */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .p-menubar .p-menuitem-link:hover {
+    color: #f9a602 !important; /* Dorado suave */
+    transform: scale(1.1);
+  }
+  
+  .p-menubar .pi {
+    margin-right: 8px;
+    color: #2d3436; /* Íconos en gris oscuro */
+  }
+  
+  .custom-button {
+    background: #636e72; /* Gris oscuro */
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  }
+  
+  .custom-button:hover {
+    background: #f9a602; /* Cambia a dorado suave */
+    transform: scale(1.1);
+  }
+  

@@ -1,0 +1,109 @@
+/* src/components/Signup.css */
+
+/* Contenedor principal */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+    background: #f9f9f9;
+    padding: 1rem;
+}
+
+/* Card de registro */
+.signup-card {
+    width: 500px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Título del formulario */
+.signup-card h2 {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* Campos del formulario */
+.signup-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.signup-field label {
+    font-weight: bold;
+    color: #555;
+    width: 120px;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.signup-field input,
+.signup-field .p-password-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-field input:focus,
+.signup-field .p-password-input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 4px rgba(108, 99, 255, 0.5);
+    outline: none;
+}
+
+/* Botón de registro */
+.signup-button {
+    width: 100%;
+    background-color: #6c63ff;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-button:hover {
+    background-color: #534bdb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Mensajes de respuesta */
+.signup-message {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.signup-card {
+    animation: fadeIn 0.5s ease-in-out;
+}
