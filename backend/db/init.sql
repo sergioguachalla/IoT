@@ -64,3 +64,16 @@ CREATE TABLE records (
 -- Insertar el usuario "admin" con la contraseña hasheada en la tabla `users`
 INSERT INTO users (username, name, lastname, email, password, "group")
 VALUES ('admin', 'Sergio', 'Guachalla', 'sergioguachalla@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'admin');
+
+-- Insertar valores de usuarios de prueba
+INSERT INTO users (username, name, lastname, email, password, "group") VALUES 
+('user1', 'Carlos', 'Pérez', 'carlos.perez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user2', 'Ana', 'Gutiérrez', 'ana.gutierrez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user3', 'Luis', 'Martínez', 'luis.martinez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user4', 'María', 'López', 'maria.lopez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user5', 'José', 'Rodríguez', 'jose.rodriguez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user6', 'Lucía', 'Fernández', 'lucia.fernandez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user7', 'Miguel', 'González', 'miguel.gonzalez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user8', 'Elena', 'Morales', 'elena.morales@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user9', 'Javier', 'Ramírez', 'javier.ramirez@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user'),
+('user10', 'Claudia', 'Torres', 'claudia.torres@gmail.com', '0ca876a570f4f151f64f1f77a2b55f64ed30d271bd9e5f482c16b7b4efb1c71ce22ccc49c4ba1a2558917bfecc82ea7e', 'user');
