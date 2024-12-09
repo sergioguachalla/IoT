@@ -2,12 +2,12 @@ from fastapi import FastAPI, WebSocket, HTTPException
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
-
+import os
 app = FastAPI()
 
 def send_email(subject: str, to_email: str, body: str, video_url: str):
     from_email = "iot@ucb.edu.bo"
-    smtp_server = "localhost"
+    smtp_server = os.getenv("SMTP_SERVER") or "localhost"
     smtp_port = 1025
 
     # Construcción del mensaje

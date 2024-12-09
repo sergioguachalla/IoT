@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Set environment variables
 ENV DB_URL=postgresql://postgres:postgres@postgres:5432/iot
-
+ENV SMTP_SERVER=mailhog
 COPY requirements.txt .
 COPY credentials/credentials.json /app/credentials/credentials.json
 

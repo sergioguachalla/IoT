@@ -5,6 +5,7 @@ services:
     container_name: iot-backend
     environment:
       DB_URL: postgresql://postgres:postgres@postgres:5432/iot
+      SMTP_SERVER: mailhog
     ports:
       - "8000:8000"
     networks:
